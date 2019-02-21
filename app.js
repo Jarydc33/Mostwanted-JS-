@@ -33,22 +33,17 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  var displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'",chars);
 
   switch(displayOption){
     case "info":
       // TODO: get person's info
-      alert(
-        person.gender + ", " +
-        person.dob + ", " +
-        person.height + ", " +
-        person.weight + ", " +
-        person.eyeColor + ", " +
-        person.occupation
-      )
+      displayPerson(person);
+
       break;yes
     case "family":
       // TODO: get person's family
+      alert()
       break;
     case "descendants":
       // TODO: get person's descendants
@@ -68,7 +63,7 @@ function searchByName(people){
   var lastName = promptFor("What is the person's last name?", chars);
 
   let filteredPeople = people.filter(function(el) {
-    if(el.firstName === firstName && el.lastName === lastName) {
+    if(el.firstName.toLowerCase() === firstName.toLowerCase() && el.lastName.toLowerCase() === lastName.toLowerCase()) {
       return el;
     }
   });
@@ -85,13 +80,19 @@ function displayPeople(people){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
-
+//displayPerson function is complete! -Jaryd
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   // TODO: finish getting the rest of the information to display
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "DOB: " + person.dob + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Eye color: " + person.eyeColor + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
   alert(personInfo);
 }
 
