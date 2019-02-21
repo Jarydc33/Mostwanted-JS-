@@ -2,7 +2,6 @@
 Build all of your functions for displaying and gathering information below (GUI).
 */
 
-//Test of first commit to repo - McDonnes
 
 // app is the function called to start the entire application
 function app(people){
@@ -12,7 +11,7 @@ function app(people){
       // TODO: search by name
       break;
     case 'no':
-      // TODO: search by traits
+          searchByTrait(people);
       break;
     default:
       alert("Invalid input. Please try again!");
@@ -100,3 +99,34 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+function searchByTrait(peoplePool){
+  let response = prompt("What trait would you like to search by?\n(1) Gender\n(2) Age\n(3) Height\n(4) Weight\n(5) Eye Color\n(6) Occupation");
+  switch(response){
+    case "1"://search by gender
+      searchByGender(peoplePool);
+      break;
+    case "2":
+      searchByAge(peoplePool);
+      break;
+    case "3"://search by height
+      break;
+    case "4"://search by weight
+      break;
+    case "5"://search by eye color
+      break;
+    case "6"://search by occupation
+      break;
+    case "7"://choose person
+      break;
+  }
+}
+function searchByGender(people){
+  let genderFilter = prompt("What is the person's gender? M/F?");
+  let filteredPeople = people.filter(function(el) {
+    if(el.gender === genderFilter) {
+      return el;
+    }
+  });
+  searchByTrait(filteredPeople);
+}
+
