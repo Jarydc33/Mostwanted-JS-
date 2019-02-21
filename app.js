@@ -13,7 +13,7 @@ function app(people){
 
       break;
     case 'no':
-          searchByTrait(people);
+          searchByTrait(people, people);
       break;
     default:
       alert("Invalid input. Please try again!");
@@ -112,46 +112,53 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
-function searchByTrait(peoplePool){
-  let response = prompt("What trait would you like to search by?\n(1) Gender\n(2) Age\n(3) Height\n(4) Weight\n(5) Eye Color\n(6) Occupation\n(7) Show list");
+function searchByTrait(people, peoplePool){
+  let response = prompt("What trait would you like to search by?\n(1) Gender\n(2) Age\n(3) Height\n(4) Weight\n(5) Eye Color\n(6) Occupation\n(7) Show list\n(0) Name");
   switch(response){
+    case "0":
+      searchByName(people);
+      break;
     case "1"://search by gender
-      searchByGender(peoplePool);
+      searchByGender(people, peoplePool);
       break;
     case "2":
-      searchByAge(peoplePool);
+      searchByAge(people, peoplePool);
       break;
-    case "3"://search by height
+    case "3":
+      searchByHeight(people, peoplePool);
       break;
     case "4"://search by weight
+      searchByWeight(people, peoplePool);
       break;
     case "5"://search by eye color
+      searchByEyeColor(people, peoplePool);
       break;
     case "6"://search by occupation
+      searchByOccupation(people, peoplePool);
       break;
     case "7":
       console.log(displayPeople(peoplePool));
-      searchByTrait(peoplePool);
+      searchByTrait(people, peoplePool);
       break;
   }
 }
-function searchByGender(people){
+function searchByGender(people, peoplePool){
   let genderFilter = prompt("What is the person's gender? male/female?");
-  let filteredPeople = people.filter(function(el) {
+  let filteredPeople = peoplePool.filter(function(el) {
     if(el.gender === genderFilter) {
       return el;
     }
   });
-  searchByTrait(filteredPeople); 
+  searchByTrait(people, filteredPeople); 
 }
-function searchByAge(people){
+function searchByAge(people, peoplePool){
   let ageFilter = prompt("What is the person's age?");
-  let filteredPeople = people.filter(function(el) {
+  let filteredPeople = peoplePool.filter(function(el) {
     if(getAge(el.dob) == ageFilter) {
       return el;
     }
   });
-  searchByTrait(filteredPeople);
+  searchByTrait(people, filteredPeople);
 }
 function getAge(dob){
   let birthday = dob.split("/"); 
@@ -166,4 +173,39 @@ function getAge(dob){
   return age; 
 }
 //"dob": "4/1/1947",
-
+function searchByHeight(people, peoplePool){
+  let heightFilter = prompt("What is the person's height?");
+  let filteredPeople = peoplePool.filter(function(el) {
+    if(el.height == heightFilter) {
+      return el;
+    }
+  });
+  searchByTrait(people, filteredPeople);
+}
+function searchByWeight(people, peoplePool){
+  let weightFilter = prompt("What is the person's weight?");
+  let filteredPeople = peoplePool.filter(function(el) {
+    if(el.weight == weightFilter) {
+      return el;
+    }
+  });
+  searchByTrait(filteredPeople);
+}
+function searchByEyeColor(people, peoplePool){
+  let eyeColorFilter = prompt("What is the person's eye color?");
+  let filteredPeople = peoplePool.filter(function(el) {
+    if(el.eyeColor == eyeColorFilter) {
+      return el;
+    }
+  });
+  searchByTrait(people, filteredPeople);
+}
+function searchByOccupation(people, peoplePool){
+  let occupationFilter = prompt("What is the person's occupation?");
+  let filteredPeople = peoplePool.filter(function(el) {
+    if(el.occupation == occupationFilter) {
+      return el;
+    }
+  });
+  searchByTrait(people, filteredPeople);
+}
