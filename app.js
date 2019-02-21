@@ -10,6 +10,8 @@ function app(people){
   switch(searchType){
     case 'yes':
       // TODO: search by name
+      searchByName(people);
+
       break;
     case 'no':
       // TODO: search by traits
@@ -36,7 +38,15 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
       // TODO: get person's info
-      break;
+      alert(
+        person.gender + ", " +
+        person.dob + ", " +
+        person.height + ", " +
+        person.weight + ", " +
+        person.eyeColor + ", " +
+        person.occupation
+      )
+      break;yes
     case "family":
       // TODO: get person's family
       break;
@@ -64,6 +74,8 @@ function searchByName(people){
   });
 
   // TODO: What to do with filteredPeople?
+  let filteredPeopleResult = filteredPeople[0];
+  mainMenu(filteredPeopleResult, people);
 
 }
 
