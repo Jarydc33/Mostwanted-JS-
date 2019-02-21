@@ -139,6 +139,6 @@ function searchByGender(people){
       return el;
     }
   });
-  searchByTrait(filteredPeople);
+  searchByTrait(filteredPeople);//can further filter by other traits. 
 }
 
