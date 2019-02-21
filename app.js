@@ -215,7 +215,6 @@ function searchByOccupation(people, peoplePool){
   });
   searchByTrait(people, filteredPeople);
 }
-<<<<<<< HEAD
 function getDescendants(person, people, descendants=[]){
   let list = [];
   let kids= people.filter(function(el) {
@@ -239,20 +238,6 @@ function displayDescendants(person, people){
     descendantList+= dList[i].firstName +" "+ dList[i].lastName + "\n";
   }
   alert(descendantList);
-=======
-
-function descendantSearchRecursive(person, people){
-
-  let filteredDescendants = people.filter(function(el){
-
-    if(el.parents[0] == person.id){
-      return el;
-
-    }
-    else if(el.parents[0] == person.id)
-      return el
-
-  });
 }
 
 function familySearch(person, people){
@@ -295,7 +280,6 @@ function familySearch(person, people){
   }
 
   return familyTracker;
->>>>>>> 5ac6017ca71c793a77589d1ac7c34ffe6cec14b9
 }
 
 
