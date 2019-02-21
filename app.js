@@ -39,10 +39,13 @@ function mainMenu(person, people){
       // TODO: get person's info
       displayPerson(person);
 
-      break;yes
+      break;
+
     case "family":
       // TODO: get person's family
-      alert()
+      let familyTracker = familySearch(person, people);
+      alert(familyTracker);
+
       break;
     case "descendants":
         displayDescendants(person, people);
@@ -212,6 +215,7 @@ function searchByOccupation(people, peoplePool){
   });
   searchByTrait(people, filteredPeople);
 }
+<<<<<<< HEAD
 function getDescendants(person, people, descendants=[]){
   let list = [];
   let kids= people.filter(function(el) {
@@ -235,6 +239,63 @@ function displayDescendants(person, people){
     descendantList+= dList[i].firstName +" "+ dList[i].lastName + "\n";
   }
   alert(descendantList);
+=======
+
+function descendantSearchRecursive(person, people){
+
+  let filteredDescendants = people.filter(function(el){
+
+    if(el.parents[0] == person.id){
+      return el;
+
+    }
+    else if(el.parents[0] == person.id)
+      return el
+
+  });
+}
+
+function familySearch(person, people){
+  let familyTracker = "";
+
+  people.filter(function(el){
+
+    if(el.currentSpouse == person.id){
+      familyTracker = "Spouse: " + el.firstName + ". ";
+    }
+  });
+
+  people.filter(function(el){
+
+    if(el.parents == person.id){
+      familyTracker +="Child: " + el.firstName + ". ";
+    }
+  });
+
+  people.filter(function(el){
+
+    if(person.parents.includes(el.id)){
+
+      familyTracker +="Parent: " + el.firstName + ". ";
+    };
+
+  });
+
+  for(let i = 0; i < people.length; i++){
+
+    if(people[i].parents[0] == person.id){
+      familyTracker += "Child: " + people[i].firstName + ". ";
+    }
+  }
+  for(let i = 0; i < people.length; i++){
+
+    if(people[i].parents[1] == person.id){
+      familyTracker += "Child: " + people[i].firstName + ". ";
+    }
+  }
+
+  return familyTracker;
+>>>>>>> 5ac6017ca71c793a77589d1ac7c34ffe6cec14b9
 }
 
 
