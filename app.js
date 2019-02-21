@@ -153,7 +153,12 @@ function searchByGender(people, peoplePool){
       return el;
     }
   });
-  searchByTrait(people, filteredPeople); 
+  searchByTrait(people, filteredPeople);
+
+  if(filteredPeople.length == 0){
+    alert("Invalid input. Please try again.")
+    searchByGender(people,peoplePool);
+  } 
 }
 function searchByAge(people, peoplePool){
   let ageFilter = prompt("What is the person's age?");
@@ -163,6 +168,11 @@ function searchByAge(people, peoplePool){
     }
   });
   searchByTrait(people, filteredPeople);
+
+  if(filteredPeople.length == 0){
+    alert("Invalid input. Please try again.")
+  searchByGender(people,peoplePool);
+  } 
 }
 function getAge(dob){
   let birthday = dob.split("/"); 
@@ -185,6 +195,7 @@ function searchByHeight(people, peoplePool){
     }
   });
   searchByTrait(people, filteredPeople);
+
 }
 function searchByWeight(people, peoplePool){
   let weightFilter = prompt("What is the person's weight?");
@@ -194,6 +205,7 @@ function searchByWeight(people, peoplePool){
     }
   });
   searchByTrait(filteredPeople);
+
 }
 function searchByEyeColor(people, peoplePool){
   let eyeColorFilter = prompt("What is the person's eye color?");
@@ -203,6 +215,7 @@ function searchByEyeColor(people, peoplePool){
     }
   });
   searchByTrait(people, filteredPeople);
+ 
 }
 function searchByOccupation(people, peoplePool){
   let occupationFilter = prompt("What is the person's occupation?");
@@ -212,6 +225,7 @@ function searchByOccupation(people, peoplePool){
     }
   });
   searchByTrait(people, filteredPeople);
+
 }
 
 function descendantSearchRecursive(person, people){
@@ -234,14 +248,14 @@ function familySearch(person, people){
   people.filter(function(el){
 
     if(el.currentSpouse == person.id){
-      familyTracker = "Spouse: " + el.firstName + ". ";
+      familyTracker = "Spouse: " + el.firstName + " " + el.lastName + ".\n";
     }
   });
 
   people.filter(function(el){
 
     if(el.parents == person.id){
-      familyTracker +="Child: " + el.firstName + ". ";
+      familyTracker +="Child: " + el.firstName + " " + el.lastName + ".\n";
     }
   });
 
@@ -249,7 +263,7 @@ function familySearch(person, people){
 
     if(person.parents.includes(el.id)){
 
-      familyTracker +="Parent: " + el.firstName + ". ";
+      familyTracker +="Parent: " + el.firstName + " " + el.lastName + ".\n";
     };
 
   });
@@ -257,13 +271,13 @@ function familySearch(person, people){
   for(let i = 0; i < people.length; i++){
 
     if(people[i].parents[0] == person.id){
-      familyTracker += "Child: " + people[i].firstName + ". ";
+      familyTracker += "Child: " + people[i].firstName + " " + people[i].lastName + ".\n" ;
     }
   }
   for(let i = 0; i < people.length; i++){
 
     if(people[i].parents[1] == person.id){
-      familyTracker += "Child: " + people[i].firstName + ". ";
+      familyTracker += "Child: " + people[i].firstName + " " + people[i].lastName + ".\n";
     }
   }
 
