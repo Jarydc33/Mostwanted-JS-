@@ -112,7 +112,7 @@ function chars(input){
   return true; // default validation only
 }
 function searchByTrait(peoplePool){
-  let response = prompt("What trait would you like to search by?\n(1) Gender\n(2) Age\n(3) Height\n(4) Weight\n(5) Eye Color\n(6) Occupation");
+  let response = prompt("What trait would you like to search by?\n(1) Gender\n(2) Age\n(3) Height\n(4) Weight\n(5) Eye Color\n(6) Occupation\n(7) Show list");
   switch(response){
     case "1"://search by gender
       searchByGender(peoplePool);
@@ -128,17 +128,41 @@ function searchByTrait(peoplePool){
       break;
     case "6"://search by occupation
       break;
-    case "7"://choose person
+    case "7":
+      console.log(displayPeople(peoplePool));
+      searchByTrait(peoplePool);
       break;
   }
 }
 function searchByGender(people){
-  let genderFilter = prompt("What is the person's gender? M/F?");
+  let genderFilter = prompt("What is the person's gender? male/female?");
   let filteredPeople = people.filter(function(el) {
     if(el.gender === genderFilter) {
       return el;
     }
   });
-  searchByTrait(filteredPeople);//can further filter by other traits. 
+  searchByTrait(filteredPeople); 
 }
+function searchByAge(people){
+  let ageFilter = prompt("What is the person's age?");
+  let filteredPeople = people.filter(function(el) {
+    if(getAge(el.dob) == ageFilter) {
+      return el;
+    }
+  });
+  searchByTrait(filteredPeople);
+}
+function getAge(dob){
+  let birthday = dob.split("/"); 
+  let today = new Date();
+  let age = today.getFullYear() - birthday[2]; 
+  if(today.getMonth()<birthday[0]){
+    age--;
+  }else if(today.getMonth()==birthday[0] && today.getday > birthday[1]){
+    age--;
+  }
+  console.log(age);
+  return age; 
+}
+//"dob": "4/1/1947",
 
