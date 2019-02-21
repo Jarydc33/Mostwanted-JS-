@@ -45,7 +45,7 @@ function mainMenu(person, people){
       alert()
       break;
     case "descendants":
-      // TODO: get person's descendants
+        displayDescendants(person, people);
       break;
     case "restart":
       app(people); // restart
@@ -140,6 +140,9 @@ function searchByTrait(people, peoplePool){
       console.log(displayPeople(peoplePool));
       searchByTrait(people, peoplePool);
       break;
+    default:
+      alert("Invalid option selected, please try again!");
+      searchByTrait(people, peoplePool);
   }
 }
 function searchByGender(people, peoplePool){
@@ -209,3 +212,29 @@ function searchByOccupation(people, peoplePool){
   });
   searchByTrait(people, filteredPeople);
 }
+function getDescendants(person, people, descendants=[]){
+  let list = [];
+  let kids= people.filter(function(el) {
+    if(el.parents.includes(person.id)) {
+      return el;
+    }
+  });
+  list = descendants.concat(kids);
+  if(kids.length === 0){
+    return descendants;
+  }else{
+    for(let i = 0; i<kids.length; i++){
+      return getDescendants(kids[i], people, list);
+    }
+  }
+}
+function displayDescendants(person, people){
+  let dList = getDescendants(person, people);
+  let descendantList = "Descendants: ";
+  for(let i = 0; i <dList.length; i++){
+    descendantList+= dList[i].firstName +" "+ dList[i].lastName + "\n";
+  }
+  alert(descendantList);
+}
+
+
