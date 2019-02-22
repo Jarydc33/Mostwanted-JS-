@@ -163,7 +163,7 @@ function getAge(dob){
   let age = today.getFullYear() - birthday[2]; 
   if(today.getMonth()<birthday[0]){
     age--;
-  }else if(today.getMonth()==birthday[0] && today.getday > birthday[1]){
+  }else if(today.getMonth()==birthday[0] && today.getDate() > birthday[1]){
     age--;
   }
   console.log(age);
