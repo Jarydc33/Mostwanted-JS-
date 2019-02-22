@@ -139,7 +139,7 @@ function searchByGender(people, peoplePool){
     }
   });
   if(filteredPeople.length === 0){
-    userValidation(people,filteredPeople,searchByGender);
+    userValidation(people,peoplePool);
   }
   searchByTrait(people, filteredPeople);
 }
@@ -151,7 +151,7 @@ function searchByAge(people, peoplePool){
     }
   });
   if(filteredPeople.length === 0){
-    userValidation(people,filteredPeople,searchByAge);
+    userValidation(people,peoplePool);
   }
   searchByTrait(people, filteredPeople);
 }
@@ -178,7 +178,7 @@ function searchByHeight(people, peoplePool){
   });
 
   if(filteredPeople.length === 0){
-    userValidation(people,filteredPeople,searchByHeight);
+    userValidation(people,peoplePool);
   }
   searchByTrait(people, filteredPeople);
 }
@@ -190,7 +190,7 @@ function searchByWeight(people, peoplePool){
     }
   });
   if(filteredPeople.length === 0){
-    userValidation(people,filteredPeople,searchByWeight);
+    userValidation(people,peoplePool);
   }
   searchByTrait(people, filteredPeople);
 }
@@ -203,7 +203,7 @@ function searchByEyeColor(people, peoplePool){
   });
 
   if(filteredPeople.length === 0){
-    userValidation(people,filteredPeople,searchByEyeColor);
+    userValidation(people,peoplePool);
   }
   searchByTrait(people, filteredPeople);
 }
@@ -216,7 +216,7 @@ function searchByOccupation(people, peoplePool){
   });
 
   if(filteredPeople.length == 0){
-    userValidation(people,filteredPeople,searchByOccupation);
+    userValidation(people,peoplePool);
   }
   searchByTrait(people, filteredPeople);
 }
@@ -283,8 +283,8 @@ function familySearch(person, people){
   }
   return familyTracker;
 }
-function userValidation(people,filteredPeople,callback){
+function userValidation(people,peoplePool,callback, ){
     alert("Invalid input. No one found.");
-    callback(people,filteredPeople);
+    callback(people,peoplePool);
 }
 
