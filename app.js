@@ -131,7 +131,7 @@ function searchByTrait(people, peoplePool){
 function searchByGender(people, peoplePool){
   let genderFilter = prompt("What is the person's gender? male/female?");
   let filteredPeople = peoplePool.filter(function(el) {
-    if(el.gender === genderFilter) {
+    if(el.gender == genderFilter) {
       return el;
     }
   });
