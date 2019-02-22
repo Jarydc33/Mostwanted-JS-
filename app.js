@@ -285,6 +285,6 @@ function familySearch(person, people){
 }
 function userValidation(people,filteredPeople,callback){
     alert("Invalid input. No one found.");
-    callback(people,filteredPeople);
+    searchByTrait(people,peoplePool);
 }
 
