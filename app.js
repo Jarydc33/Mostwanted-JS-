@@ -212,7 +212,7 @@ function searchByOccupation(people, peoplePool){
     }
   });
 
-  if(filteredPeople.length === 0){
+  if(filteredPeople.length == 0){
     userValidation(people,filteredPeople,searchByOccupation);
   }
   searchByTrait(people, filteredPeople);
