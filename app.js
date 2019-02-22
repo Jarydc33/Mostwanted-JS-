@@ -36,55 +36,43 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-      // TODO: get person's info
       displayPerson(person);
 
       break;
 
     case "family":
-      // TODO: get person's family
       let familyTracker = familySearch(person, people);
       alert(familyTracker);
-
       break;
     case "descendants":
         displayDescendants(person, people);
       break;
     case "restart":
-      app(people); // restart
+      app(people);
       break;
     case "quit":
-      return; // stop execution
+      return; 
     default:
-      return mainMenu(person, people); // ask again
+      return mainMenu(person, people);
   }
 }
-
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
-
   let filteredPeople = people.filter(function(el) {
     if(el.firstName.toLowerCase() === firstName.toLowerCase() && el.lastName.toLowerCase() === lastName.toLowerCase()) {
       return el;
     }
   });
-
   let filteredPeopleResult = filteredPeople[0];
   mainMenu(filteredPeopleResult, people);
-
 }
-
-// alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
-//displayPerson function is complete! -Jaryd
 function displayPerson(person){
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender: " + person.gender + "\n";
@@ -95,23 +83,17 @@ function displayPerson(person){
   personInfo += "Occupation: " + person.occupation + "\n";
   alert(personInfo);
 }
-
-// function that prompts and validates user input
 function promptFor(question, callback){
   do{
     var response = prompt(question).trim();
   } while(!response || !callback(response));
   return response;
 }
-
-// helper function to pass into promptFor to validate yes/no answers
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
-
-// helper function to pass in as default promptFor validation
 function chars(input){
-  return true; // default validation only
+  return true;
 }
 function searchByTrait(people, peoplePool){
   let response = prompt("What trait would you like to search by?\n(1) Gender\n(2) Age\n(3) Height\n(4) Weight\n(5) Eye Color\n(6) Occupation\n(7) Show list\n(0) Name");
@@ -153,7 +135,6 @@ function searchByGender(people, peoplePool){
       return el;
     }
   });
-
   if(filteredPeople.length === 0){
     userValidation(people,filteredPeople,searchByEyeColor);
   }
@@ -188,7 +169,6 @@ function getAge(dob){
   console.log(age);
   return age; 
 }
-//"dob": "4/1/1947",
 function searchByHeight(people, peoplePool){
   let heightFilter = prompt("What is the person's height?");
   let filteredPeople = peoplePool.filter(function(el) {
@@ -201,7 +181,6 @@ function searchByHeight(people, peoplePool){
     userValidation(people,filteredPeople,searchByEyeColor);
   }
   searchByTrait(people, filteredPeople);
-
 }
 function searchByWeight(people, peoplePool){
   let weightFilter = prompt("What is the person's weight?");
@@ -210,12 +189,10 @@ function searchByWeight(people, peoplePool){
       return el;
     }
   });
-
   if(filteredPeople.length === 0){
     userValidation(people,filteredPeople,searchByEyeColor);
   }
   searchByTrait(people, filteredPeople);
-
 }
 function searchByEyeColor(people, peoplePool){
   let eyeColorFilter = prompt("What is the person's eye color?");
@@ -229,7 +206,6 @@ function searchByEyeColor(people, peoplePool){
     userValidation(people,filteredPeople,searchByEyeColor);
   }
   searchByTrait(people, filteredPeople);
- 
 }
 function searchByOccupation(people, peoplePool){
   let occupationFilter = prompt("What is the person's occupation?");
@@ -239,22 +215,22 @@ function searchByOccupation(people, peoplePool){
     }
   });
   searchByTrait(people, filteredPeople);
-
 }
-function getDescendants(person, people, descendants=[]){
+function getDescendants(person, people){
   let list = [];
   let kids= people.filter(function(el) {
     if(el.parents.includes(person.id)) {
       return el;
     }
   });
-  list = descendants.concat(kids);
+  list = list.concat(kids);
   if(kids.length === 0){
-    return descendants;
+    return list;
   }else{
     for(let i = 0; i<kids.length; i++){
-      return getDescendants(kids[i], people, list);
+      list = list.concat(getDescendants(kids[i], people));
     }
+    return list;
   }
 }
 function displayDescendants(person, people){
@@ -268,9 +244,7 @@ function displayDescendants(person, people){
 
 function familySearch(person, people){
   let familyTracker = "";
-
   for(let i = 0; i < people.length; i++){
-
     if(people[i].currentSpouse == person.id){
       familyTracker = "Spouse: " + people[i].firstName + " " + people[i].lastName + ".\n";
     }
@@ -291,7 +265,6 @@ function familySearch(person, people){
     };
 
   };
-
   for(let i = 0; i < people.length; i++){
 
     if(people[i].parents[0] == person.id){
@@ -304,12 +277,9 @@ function familySearch(person, people){
       familyTracker += "Child: " + people[i].firstName + " " + people[i].lastName + ".\n";
     }
   }
-
   return familyTracker;
 }
-
 function userValidation(people,filteredPeople,callback){
-    
     alert("Invalid input. No one found.");
     callback(people,filteredPeople);
 }
