@@ -147,11 +147,10 @@ function searchByAge(people, peoplePool){
       return el;
     }
   });
-  searchByTrait(people, filteredPeople);
-
   if(filteredPeople.length === 0){
     userValidation(people,filteredPeople,searchByAge);
   }
+  searchByTrait(people, filteredPeople);
 }
 function getAge(dob){
   let birthday = dob.split("/"); 
@@ -159,8 +158,10 @@ function getAge(dob){
   let age = today.getFullYear() - birthday[2]; 
   if(today.getMonth()<birthday[0]){
     age--;
-  }else if(today.getMonth()==birthday[0] && today.getDate() > birthday[1]){
-    age--;
+  }else if (today.getMonth() == birthday[0]){
+    if(today.getDate()<birthday[1]){
+      age--; 
+    }
   }
   console.log(age);
   return age; 
