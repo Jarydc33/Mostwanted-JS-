@@ -37,9 +37,7 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
       displayPerson(person);
-
       break;
-
     case "family":
       let familyTracker = familySearch(person, people);
       alert(familyTracker);
@@ -55,6 +53,7 @@ function mainMenu(person, people){
     default:
       return mainMenu(person, people);
   }
+  mainMenu(person, people);
 }
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
