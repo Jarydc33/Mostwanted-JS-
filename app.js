@@ -283,8 +283,8 @@ function familySearch(person, people){
   }
   return familyTracker;
 }
-function userValidation(people,peoplePool,callback, ){
+function userValidation(people,peoplePool){
     alert("Invalid input. No one found.");
-    callback(people,peoplePool);
+    searchByTrait(people,peoplePool);
 }
 
