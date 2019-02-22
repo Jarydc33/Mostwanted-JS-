@@ -136,13 +136,9 @@ function searchByGender(people, peoplePool){
     }
   });
   if(filteredPeople.length === 0){
-    userValidation(people,filteredPeople,searchByEyeColor);
+    userValidation(people,filteredPeople,searchByGender);
   }
   searchByTrait(people, filteredPeople);
-
-  if(filteredPeople.length === 0){
-    userValidation(people,filteredPeople,searchByEyeColor);
-  }
 }
 function searchByAge(people, peoplePool){
   let ageFilter = prompt("What is the person's age?");
@@ -154,7 +150,7 @@ function searchByAge(people, peoplePool){
   searchByTrait(people, filteredPeople);
 
   if(filteredPeople.length === 0){
-    userValidation(people,filteredPeople,searchByEyeColor);
+    userValidation(people,filteredPeople,searchByAge);
   }
 }
 function getAge(dob){
@@ -178,7 +174,7 @@ function searchByHeight(people, peoplePool){
   });
 
   if(filteredPeople.length === 0){
-    userValidation(people,filteredPeople,searchByEyeColor);
+    userValidation(people,filteredPeople,searchByHeight);
   }
   searchByTrait(people, filteredPeople);
 }
@@ -190,7 +186,7 @@ function searchByWeight(people, peoplePool){
     }
   });
   if(filteredPeople.length === 0){
-    userValidation(people,filteredPeople,searchByEyeColor);
+    userValidation(people,filteredPeople,searchByWeight);
   }
   searchByTrait(people, filteredPeople);
 }
@@ -214,6 +210,10 @@ function searchByOccupation(people, peoplePool){
       return el;
     }
   });
+
+  if(filteredPeople.length === 0){
+    userValidation(people,filteredPeople,searchByOccupation);
+  }
   searchByTrait(people, filteredPeople);
 }
 function getDescendants(person, people){
