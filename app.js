@@ -37,9 +37,7 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
       displayPerson(person);
-
       break;
-
     case "family":
       let familyTracker = familySearch(person, people);
       alert(familyTracker);
@@ -55,6 +53,7 @@ function mainMenu(person, people){
     default:
       return mainMenu(person, people);
   }
+  mainMenu(person, people);
 }
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
@@ -96,7 +95,7 @@ function chars(input){
   return true;
 }
 function searchByTrait(people, peoplePool){
-  let response = prompt("What trait would you like to search by?\n(1) Gender\n(2) Age\n(3) Height\n(4) Weight\n(5) Eye Color\n(6) Occupation\n(7) Show list\n(0) Name");
+  let response = prompt("What trait would you like to search by?\n(0) Name\n(1) Gender\n(2) Age\n(3) Height\n(4) Weight\n(5) Eye Color\n(6) Occupation\n(7) Show list\n(8) Reset");
   switch(response){
     case "0":
       searchByName(people);
@@ -122,6 +121,10 @@ function searchByTrait(people, peoplePool){
     case "7":
       console.log(displayPeople(peoplePool));
       searchByTrait(people, peoplePool);
+      break;
+    case "8":
+      alert("Filter Reset!");
+      searchByTrait(people, people);
       break;
     default:
       alert("Invalid option selected, please try again!");
