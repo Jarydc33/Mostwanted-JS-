@@ -70,7 +70,6 @@ function searchByName(people){
     }
   });
 
-  // TODO: What to do with filteredPeople?
   let filteredPeopleResult = filteredPeople[0];
   mainMenu(filteredPeopleResult, people);
 
@@ -88,7 +87,6 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display
   personInfo += "Gender: " + person.gender + "\n";
   personInfo += "DOB: " + person.dob + "\n";
   personInfo += "Height: " + person.height + "\n";
@@ -155,12 +153,15 @@ function searchByGender(people, peoplePool){
       return el;
     }
   });
+
+  if(filteredPeople.length === 0){
+    userValidation(people,filteredPeople,searchByEyeColor);
+  }
   searchByTrait(people, filteredPeople);
 
-  if(filteredPeople.length == 0){
-    alert("Invalid input. Please try again.")
-    searchByGender(people,peoplePool);
-  } 
+  if(filteredPeople.length === 0){
+    userValidation(people,filteredPeople,searchByEyeColor);
+  }
 }
 function searchByAge(people, peoplePool){
   let ageFilter = prompt("What is the person's age?");
@@ -171,10 +172,9 @@ function searchByAge(people, peoplePool){
   });
   searchByTrait(people, filteredPeople);
 
-  if(filteredPeople.length == 0){
-    alert("Invalid input. Please try again.")
-  searchByGender(people,peoplePool);
-  } 
+  if(filteredPeople.length === 0){
+    userValidation(people,filteredPeople,searchByEyeColor);
+  }
 }
 function getAge(dob){
   let birthday = dob.split("/"); 
@@ -196,6 +196,10 @@ function searchByHeight(people, peoplePool){
       return el;
     }
   });
+
+  if(filteredPeople.length === 0){
+    userValidation(people,filteredPeople,searchByEyeColor);
+  }
   searchByTrait(people, filteredPeople);
 
 }
@@ -206,7 +210,11 @@ function searchByWeight(people, peoplePool){
       return el;
     }
   });
-  searchByTrait(filteredPeople);
+
+  if(filteredPeople.length === 0){
+    userValidation(people,filteredPeople,searchByEyeColor);
+  }
+  searchByTrait(people, filteredPeople);
 
 }
 function searchByEyeColor(people, peoplePool){
@@ -216,6 +224,10 @@ function searchByEyeColor(people, peoplePool){
       return el;
     }
   });
+
+  if(filteredPeople.length === 0){
+    userValidation(people,filteredPeople,searchByEyeColor);
+  }
   searchByTrait(people, filteredPeople);
  
 }
@@ -257,28 +269,28 @@ function displayDescendants(person, people){
 function familySearch(person, people){
   let familyTracker = "";
 
-  people.filter(function(el){
+  for(let i = 0; i < people.length; i++){
 
-    if(el.currentSpouse == person.id){
-      familyTracker = "Spouse: " + el.firstName + " " + el.lastName + ".\n";
+    if(people[i].currentSpouse == person.id){
+      familyTracker = "Spouse: " + people[i].firstName + " " + people[i].lastName + ".\n";
     }
-  });
+  };
 
-  people.filter(function(el){
+  for(let i = 0; i < people.length; i++){
 
-    if(el.parents == person.id){
-      familyTracker +="Child: " + el.firstName + " " + el.lastName + ".\n";
+    if(people[i].parents == person.id){
+      familyTracker +="Child: " + people[i].firstName + " " + people[i].lastName + ".\n";
     }
-  });
+  };
 
-  people.filter(function(el){
+  for(let i = 0; i < people.length; i++){
 
-    if(person.parents.includes(el.id)){
+    if(person.parents.includes(people[i].id)){
 
-      familyTracker +="Parent: " + el.firstName + " " + el.lastName + ".\n";
+      familyTracker +="Parent: " + people[i].firstName + " " + people[i].lastName + ".\n";
     };
 
-  });
+  };
 
   for(let i = 0; i < people.length; i++){
 
@@ -296,4 +308,9 @@ function familySearch(person, people){
   return familyTracker;
 }
 
+function userValidation(people,filteredPeople,callback){
+    
+    alert("Invalid input. No one found.");
+    callback(people,filteredPeople);
+}
 
