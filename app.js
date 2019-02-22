@@ -131,7 +131,7 @@ function searchByTrait(people, peoplePool){
 function searchByGender(people, peoplePool){
   let genderFilter = prompt("What is the person's gender? male/female?");
   let filteredPeople = peoplePool.filter(function(el) {
-    if(el.gender == genderFilter) {
+    if(el.gender == genderFilter.toLowerCase()) {
       return el;
     }
   });
@@ -194,7 +194,7 @@ function searchByWeight(people, peoplePool){
 function searchByEyeColor(people, peoplePool){
   let eyeColorFilter = prompt("What is the person's eye color?");
   let filteredPeople = peoplePool.filter(function(el) {
-    if(el.eyeColor == eyeColorFilter) {
+    if(el.eyeColor == eyeColorFilter.toLowerCase()) {
       return el;
     }
   });
@@ -207,12 +207,12 @@ function searchByEyeColor(people, peoplePool){
 function searchByOccupation(people, peoplePool){
   let occupationFilter = prompt("What is the person's occupation?");
   let filteredPeople = peoplePool.filter(function(el) {
-    if(el.occupation == occupationFilter) {
+    if(el.occupation == occupationFilter.toLowerCase()) {
       return el;
     }
   });
 
-  if(filteredPeople.length === 0){
+  if(filteredPeople.length == 0){
     userValidation(people,filteredPeople,searchByOccupation);
   }
   searchByTrait(people, filteredPeople);
