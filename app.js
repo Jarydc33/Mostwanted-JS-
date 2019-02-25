@@ -1,39 +1,26 @@
-/*
-Build all of your functions for displaying and gathering information below (GUI).
-*/
 
-
-// app is the function called to start the entire application
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-      // TODO: search by name
       searchByName(people);
-
       break;
     case 'no':
           searchByTrait(people, people);
       break;
     default:
       alert("Invalid input. Please try again!");
-      app(people); // restart app
+      app(people); 
     break;
   }
 }
 
-// Menu function to call once you find who you are looking for
 function mainMenu(person, people){
-
-  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
-
   if(!person){
     alert("Could not find that individual.");
     return app(people); // restart
   }
-
   var displayOption = promptFor("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'",chars);
-
   switch(displayOption){
     case "info":
       displayPerson(person);
@@ -201,7 +188,6 @@ function searchByEyeColor(people, peoplePool){
       return el;
     }
   });
-
   if(filteredPeople.length === 0){
     userValidation(people,peoplePool);
   }
@@ -214,7 +200,6 @@ function searchByOccupation(people, peoplePool){
       return el;
     }
   });
-
   if(filteredPeople.length == 0){
     userValidation(people,peoplePool);
   }
@@ -253,21 +238,18 @@ function familySearch(person, people){
       familyTracker = "Spouse: " + people[i].firstName + " " + people[i].lastName + ".\n";
     }
   };
-
   for(let i = 0; i < people.length; i++){
 
     if(people[i].parents == person.id){
       familyTracker +="Child: " + people[i].firstName + " " + people[i].lastName + ".\n";
     }
   };
-
   for(let i = 0; i < people.length; i++){
 
     if(person.parents.includes(people[i].id)){
 
       familyTracker +="Parent: " + people[i].firstName + " " + people[i].lastName + ".\n";
     };
-
   };
   for(let i = 0; i < people.length; i++){
 
