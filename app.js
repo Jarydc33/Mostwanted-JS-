@@ -8,9 +8,7 @@ function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-      // TODO: search by name
       searchByName(people);
-
       break;
     case 'no':
           searchByTrait(people, people);
@@ -249,38 +247,29 @@ function displayDescendants(person, people){
 function familySearch(person, people){
   let familyTracker = "";
   for(let i = 0; i < people.length; i++){
+
     if(people[i].currentSpouse == person.id){
       familyTracker = "Spouse: " + people[i].firstName + " " + people[i].lastName + ".\n";
     }
-  };
 
-  for(let i = 0; i < people.length; i++){
-
-    if(people[i].parents == person.id){
+    else if(people[i].parents == person.id){
       familyTracker +="Child: " + people[i].firstName + " " + people[i].lastName + ".\n";
     }
-  };
 
-  for(let i = 0; i < people.length; i++){
-
-    if(person.parents.includes(people[i].id)){
-
+    else if(person.parents.includes(people[i].id)){
       familyTracker +="Parent: " + people[i].firstName + " " + people[i].lastName + ".\n";
-    };
-
-  };
-  for(let i = 0; i < people.length; i++){
-
-    if(people[i].parents[0] == person.id){
-      familyTracker += "Child: " + people[i].firstName + " " + people[i].lastName + ".\n" ;
     }
-  }
-  for(let i = 0; i < people.length; i++){
 
-    if(people[i].parents[1] == person.id){
+    else if(people[i].parents[0] == person.id){
       familyTracker += "Child: " + people[i].firstName + " " + people[i].lastName + ".\n";
     }
+
+    else if(people[i].parents[1] == person.id){
+      familyTracker += "Child: " + people[i].firstName + " " + people[i].lastName + ".\n";
+    }
+
   }
+
   return familyTracker;
 }
 function userValidation(people,peoplePool){
